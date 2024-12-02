@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The ₹1 Journey: Start Small, Achieve Big</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: Cornsilk;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header img {
+            width: 100px;
+            height: auto;
+            border-radius: 50%;
+        }
+        header h1 {
+            margin: 10px 0;
+            font-size: 24px;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .step {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .step h2 {
+            color: #1e3a8a;
+            margin: 0;
+        }
+
+        .step p {
+            color: #555;
+        }
+
+        .cta-button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .payment-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .payment-button {
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 5px;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        .qr-code {
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .qr-code img {
+            max-width: 150px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        footer {
+            background-color: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Modal Styling */
+        .modal, .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+        }
+
+        .modal {
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            width: 80%;
+            height: 60%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2000;
+        }
+
+        .modal-header {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .modal iframe {
+            width: 100%;
+            height: calc(100% - 40px);
+            border: none;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .close-modal {
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            float: right;
+            margin-top: -10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="C:\Users\dubba\Downloads\png.jpg" alt="₹1 Journey Logo">
+        <h1>The ₹1 Journey: Start Small, Achieve Big</h1>
+        <p>Your journey to transformation begins with just ₹1.</p>
+    </header>
+
+    <section>
+        <h2>Steps to Achieve Your Goal</h2>
+        <div class="step">
+            <h2>Step 1: ₹1</h2>
+            <p>Get our *Basic Karma Guide (PDF)* to kickstart your journey.</p>
+            <button class="cta-button" onclick="openModal('https://example.com/step1')">View Details</button>
+        </div>
+        <div class="step">
+            <h2>Step 2: ₹2</h2>
+            <p>Workbook on self-reflection exercises to discover your inner self.</p>
+            <button class="cta-button" onclick="openModal('https://example.com/step2')">View Details</button>
+        </div>
+        <!-- Add more steps similarly -->
+
+        <div class="payment-section">
+            <h3>Make Payment</h3>
+            <p>Choose a secure payment method:</p>
+            <a class="payment-button" href="https://www.phonepe.com">Pay via PhonePe</a>
+            <a class="payment-button" href="https://www.instamojo.com">Pay via Instamojo</a>
+            <div class="qr-code">
+                <p>Or scan this QR code to pay:</p>
+                <img src="C:\Users\dubba\Downloads\WhatsApp Image 2024-12-02 at 1.20.00 PM.jpeg" alt="QR Code">
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="overlay" id="overlay"></div>
+    <div class="modal" id="modal">
+        <div class="modal-header">
+            Step Details
+            <button class="close-modal" onclick="closeModal()">X</button>
+        </div>
+        <iframe id="modal-iframe"></iframe>
+    </div>
+
+    <footer>
+        <p>Contact us: <a href="mailto:onerupeesolutions@gmail.com" style="color: white;">onerupeesolutions@gmail.com</a> | Call: <a href="tel:+919542540150" style="color: white;">+91 9542540150</a></p>
+        <p>&copy; 2024 The ₹1 Journey. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const overlay = document.getElementById('overlay');
+        const iframe = document.getElementById('modal-iframe');
+
+        function openModal(url) {
+            iframe.src = url;
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
+        }
+
+        function closeModal() {
+            iframe.src = '';
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
